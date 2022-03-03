@@ -7,6 +7,7 @@ import db from './dbConfig.js';
 import Company from './models/Company.js';
 import Founder from './models/Founder.js';
 import LikeOp from './operators.js';
+import path from 'path';
 
 let app = express();
 let router = express.Router();
@@ -108,23 +109,23 @@ async function filterCompany(filter) {
 
 router.route('/company').get( async(req, res) => {
     return res.json(await getCompany());
-})
+});
 
 router.route('/company/:id').get( async (req, res) => {
     return res.json(await getCompanyById(req.params.id));
-})
+});
 
 router.route('/company').post( async(req, res) => {
     return res.json(await createCompany(req.body));
-})
+});
 
 router.route('/company/:id').put( async (req, res) => {
     return res.json(await updateCompany(req.params.id, req.body));
-})
+});
 
 router.route('/company/:id').delete( async (req, res) => {
     return res.json(await deleteCompany(req.params.id));
-})
+});
 
 //Get the founders of a company !!!!!!NOT WORKING!!!!!!NOT WORKING!!!!!!
 router.route('/company/:companyId/founders').get( async (req, res, next) =>{
@@ -139,7 +140,7 @@ router.route('/company/:companyId/founders').get( async (req, res, next) =>{
     } catch(error){
         next(error);
     }
-})
+});
 
 
 //Post a founder into a company
@@ -181,7 +182,7 @@ router.route('/company/:companyId/founders/:founderId').put( async (req, res, ne
     } catch (error){
         next(error);
     }
-})
+});
 
 //delete a founder through a company
 router.route('/company/:companyId/founders/:founderId').delete( async(req, res, next) => {
@@ -203,11 +204,16 @@ router.route('/company/:companyId/founders/:founderId').delete( async(req, res, 
     }catch(error){
         next(error)
     }
-})
+});
 
 router.route('/companyFilter').get( async(req,res) => {
     return res.json(await filterCompany(req.query));
-})
+});
+
+router.route('/').get( async (req, res)=> {
+    let path = path.resolve();
+    res.sendFile(path.join(path, "build", "Index.html"));
+});
 
 let port = process.env.PORT || 8000;
 app.listen(port);
