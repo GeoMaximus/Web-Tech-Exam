@@ -1,6 +1,6 @@
 
 # Web Technologies Exam 
-<font size=8>
-    This repo contains the code presented for the Web Technologies exam <br>
-    The project is a React App developed with the help of html, css, javascript and nodejs. <br>
-</font>
+
+    This repo contains the code presented for the Web Technologies exam taken in semester I, Year III of Informatics Economics @ ASE <br>
+    The project is a React App developed with the help of HTML, CSS, JavaScript and nodejs. <br>
+
